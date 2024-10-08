@@ -1,0 +1,16 @@
+# virt env files
+.nlp_env/*
+/nlp_env
+
+#pyCharm files
+.idea/*
+
+# temp files
+*.tmp
+*.pyc
+__pycache__/
+
+# large files
+data/IMDB_50k_Dataset.csv
+
+model/GoogleNews-vectors-negative300.bin.gz
