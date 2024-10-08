@@ -1,16 +1,10 @@
 #Globals for training
-#TODO change to Path
 
 #train datasets
-#DATA_PATH_TRAIN = 'data\\toy_data_imdb_10.csv'
-#DATA_PATH_TRAIN = 'data\\toy_data_imdb_100.csv'
-#DATA_PATH_TRAIN = 'data\\toy_data_imdb_1k.csv'
 DATA_PATH_TRAIN = 'data\\train_data_imdb_25k.csv'
 
 # develop dataset
-#DATA_PATH_DEV = 'data\develop_data_imdb_2k.csv'
 DATA_PATH_DEV = 'data\develop_data_imdb_12k.csv'
-
 
 #test datasets
 DATA_PATH_IMDB_TEST = 'data\\test_data_imdb_12k.csv'

@@ -2,14 +2,12 @@ import os
 import csv
 import pandas as pd
 
-# TODO create one dataset_prepare for the three dataset, because for amazon and yeld it is the same code
 
 def write_to_csv(data, export_name):
     # Create a DataFrame
     df = pd.DataFrame(data).astype(str)
 
     # Write the DataFrame to a CSV file
-    #df.to_csv(export_name, index=False)
     df.to_csv(export_name, sep=",", quotechar='"', index=False, quoting=csv.QUOTE_ALL)
 
 def read_dataset(file_name, export_data_path):

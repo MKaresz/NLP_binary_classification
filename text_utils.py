@@ -278,12 +278,10 @@ def build_glo_ve_model(dataset_name:str, vector_size:int = 100, window_size: int
     for line in cleaned_train_corpora:
         # one paragraph in a line, separated by a simple space for the processor
         corpora.append(utils.simple_preprocess(line))
-    #return Word2Vec(sentences=corpora, vector_size=vector_size, window=window_size, workers=workers )
     # -1 to add <unk> token with zero vector
     return Word2Vec(sentences=corpora, vector_size=vector_size, window=window_size, sg=1, 
                     min_count=1, max_final_vocab=vocab_size - 1)
 
-#TODO remove don't need it
 def build_token_list(cleaned_corpora: list):
     """
     Converts a list of cleaned text paragraphs into a list of token lists.
@@ -307,110 +305,3 @@ def build_token_list(cleaned_corpora: list):
         corpora_list.append(paragraph_list)
     return corpora_list
 
-if __name__ == '__main__':
-    ## EXAMPLE WORKFLOW FOR TEXT PREPARING!
-    ###########################################
-    # clean corpora
-    sentences = ["I love machine learning hence learning PyTorch is my love", 
-                 "PyTorch is great", 
-                 "I enjoy coding", 
-                 "Deep learning is fascinating"]
-    cleaned_corpus = clean_corpus(sentences)
-    print(cleaned_corpus)
-
-    vocab = build_vocab(cleaned_corpus, 10, "test", False)
-    print(vocab)
-    # convert words to indexes in vocab
-    vocab_to_idx = build_word_to_idx_vocab(vocab)
-    print(vocab_to_idx)
-
-    # create fix-sized vectors using word indexes => for padding using 1 and un-knows using 0
-    vec_from_vocab = vectorizers.build_word_to_idx_vector(cleaned_corpus, vocab_to_idx, 7)
-    print(vec_from_vocab)
-
-    # convert  idx to words back
-    tokenized_corpora = vectorizers.build_idx_to_word_vector(vec_from_vocab, vocab_to_idx)
-    print(tokenized_corpora)
-
-# TODO remove the part below
-#########################################
-## DEBUG
-# GloVe -> build_glo_ve_model()
-# Example text data
-'''
-text_data = ["this is a sample","another example sentence there fasz faszkalap szarfasz", "a super sentence", "movie terrible good effect"]
-wv = file_utils.load_glo_ve_vector("glo_ve_1k")
-print(wv)
-print(vectorizers.build_glo_ve_vector(build_token_list(text_data), wv, paragraph_size=4))
-'''
-
-######################################
-## Build your GloVe VectorMatrix
-# train on our own corpora
-'''
-import numpy as np
-# build glove model also cleanes the corpora before train
-model = build_glo_ve_model('./data/train_data_imdb_25k.csv', vocab_size=20000)
-# vocab size: 18795
-print('vocab size:', len(model.wv.key_to_index))
-file_utils.save_glo_ve_vector(model, "glo_vec_20k")
-'''
-
-'''
-#print vector 100dim
-vec_king = model.wv['king']
-print(model.wv['king'])
-print(model.wv['queen'])
-
-vocab_size = len(model.wv.key_to_index)
-print(f"Vocabulary size: {vocab_size}")
-
-man_vector = model.wv.get_vector('man')
-king_vector = model.wv.get_vector('king')
-woman_vector = model.wv.get_vector('woman')
-queen_vector = model.wv.get_vector('queen')
-
-# 27.10506 super good, the  vectors align!
-similarity = np.dot(man_vector - woman_vector, king_vector - queen_vector)
-print(similarity)
-
-
-# top 10 words
-for index, word in enumerate(model.wv.index_to_key):
-    if index == 10:
-        break
-    print(f"word #{index}/{len(model.wv.index_to_key)} is {word}")
-'''
-
-
-'''
-###########################################
-## IMPORTANT EXAMPLE WORKFLOW!
-# clean corpora
-sentences = ["I love machine learning learning PyTorch is my love", "PyTorch is great", "I enjoy coding", "Deep learning is fascinating"]
-# GET VOCAB AND MATCHING CLEANED CORPORA
-# !!!!!!!!!!! changed use clean corpora instead
-
-vocab = build_vocab(sentences, 10, "test", False)
-print(vocab)
-# convert words to indexes in vocab
-vocab_to_idx = build_word_to_idx_vocab(vocab)
-print(vocab_to_idx)
-cleaned_corpora = clean_corpora(sentences)
-print(cleaned_corpora)
-# create sized vectors using word indexes => for padding using 1 and un-knows using 0
-vec_from_vocab = vectorizers.build_word_to_idx_vector(cleaned_corpora, vocab_to_idx, 7)
-print(vec_from_vocab)
-# convert  idx to words back
-tokenized_corpora = vectorizers.build_idx_to_word_vec(vec_from_vocab, vocab_to_idx)
-print(tokenized_corpora)
-'''
-
-#########################################
-#### Create TF-IDF vectorization
-'''
-vec_TF = vectorizers.build_tf_from_corpora(sentences, vocab, False)
-print(vec_TF)
-vec_TF_IDF = vectorizers.build_tf_idf_from_corpora(sentences, vocab)
-print(vec_TF_IDF)
-'''

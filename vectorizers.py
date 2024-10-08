@@ -143,12 +143,3 @@ def build_glo_ve_vector(corpora_tokens: list, wv: KeyedVectors, paragraph_size:i
         corpora_vec.append(paragraph_vec)
     return corpora_vec
 
-###################################################
-### test vectorizer
-'''
-import pandas as pd
-df_train = pd.read_csv('data\\train_data_imdb_25k.csv')
-vectorizer = TfidfVectorizer(binary=False)
-doc_term_matrix = vectorizer.fit_transform(df_train['review'])
-print(doc_term_matrix.get_shape())
-'''

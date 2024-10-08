@@ -20,41 +20,65 @@ This project performs sentiment analysis on the Large Movie Review Dataset v1.0 
 git clone https://github.com/yourusername/sentiment-analysis-project.git
 cd sentiment-analysis-project
 
-1. 
-Create a virtual environment and activate it:
+2. Create a virtual environment and activate it:
 
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-1. 
-Install the required packages:
+3. Install the required packages:
 
 pip install -r requirements.txt
+
+if install fails install manually the following packages for windows:
+- pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+- pip install nltk==3.9.1
+- pip install pandas==2.2.3
+- pip install numpy==2.1.1
+- pip install gensim==4.3.3
+- pip install scikit-learn==1.5.2
+- pip install matplotlib==3.9.2
+
+4. Start CLI interface:
+python menu.py
 ```
 
-2. Start program:
+2. Using the CLI interface:
 ```
 Start CLI interface by calling "python menu.py"
 
-Choose a model:
+Please choose a model:
     "1" "Simple perceptron"
     "2" "Multi linear"
     "3" "RNN"
     "4" "LSTM"
     "5" "Quit"
 
-Choose from the following option:
+Please choose an option:
     "1" "Evaluate this model"
     "2" "Predict"
     "3" "Train"
     "4" "Back to the Models"
     "5" "Quit"
 
-If you choose Evaluate you can choose from the following options:
+choosing "1" > Evaluate this model:
+Please choose a dataset:
     "1" "IMDB"
     "2" "AMAZON"
     "3" "YELP"
     "4" "Quit"
+
+choosing "2" > Predict:
+Write a review to get a sentiment prediction from the model:
+An overhyped film that doesn’t live up to its expectations, plagued by a weak script and clichéd characters. It’s a frustrating watch that ultimately feels like a waste of time.
+
+outputs tensor(0.0569, device='cuda:0')
+ negative
+
+You can try more from the review_samples.txt
+
+
+choosing "3" > Train:
+(The chosen model type train process starts.)
 ```
 
 **Requirements:**
@@ -65,11 +89,13 @@ If you choose Evaluate you can choose from the following options:
 
 •  Gensim
 
+•  NLTK
+
 •  Other dependencies listed in requirements.txt
 
 **License**
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+Please see the LICENCE file for more information.
 
 **Acknowledgements**
 

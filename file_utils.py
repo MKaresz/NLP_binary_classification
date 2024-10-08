@@ -321,13 +321,3 @@ def load_glo_ve_vector(model_name: str):
     filename = model_name + ".gv"
     full_path = os.path.join(dir_path, filename)
     return KeyedVectors.load(full_path, mmap='r')
-
-
-###################
-### cut up data 
-# cut up data and save to disk
-#df_train, df_develop, df_test = file_utils.split_data_to_three(df, save_to_disk=True, export_name="data_imdb")
-#df_develop, df_test = file_utils.split_data_to_two(df_test, save_to_disk=True, export_name="data_imdb")
-
-#my_model = load_model('linear')
-#print(my_model)
