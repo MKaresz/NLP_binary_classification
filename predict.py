@@ -56,4 +56,5 @@ def get_prediction_from_df(model_type: str, df_data: pd.DataFrame):
     test_loader, _ = train.get_data_loader(model_type=model_type, df=df_data, batch_size=model_params.batch_size,
                                                             paragraph_size=model_params.paragraph_size)
     model_evaluate.evaluate_model(model, test_loader, model_params.sentiment_threshold)
+    model_evaluate.plot_training_history(model_params)
 

@@ -1,5 +1,6 @@
 import train
 import predict
+import model_evaluate
 
 import sys
 import pandas as pd
@@ -22,7 +23,7 @@ DATASETS = {
 def make_evaluation(model_type: str, dataset: int):
     """
     Evaluate the model. Evaluation includes the confusion matrix, 
-    the precision-recall curve and the loss on training and validation data 
+    the precision-recall curve and the loss on training and validation data
     during the training of the model.
 
     Args:
