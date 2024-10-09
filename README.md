@@ -74,7 +74,7 @@ An overhyped film that doesn’t live up to its expectations, plagued by a weak 
 outputs tensor(0.0569, device='cuda:0')
  negative
 
-You can try more from the review_samples.txt
+Note: One can try from the listed examples in the ./review_samples.txt file.
 
 
 choosing "3" > Train:
