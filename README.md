@@ -1,4 +1,4 @@
-# Sentiment Analysis Project
+# Sentiment Analysis on Movie Reviews
 
 This project performs sentiment analysis on the Large Movie Review Dataset v1.0 using various models implemented in Python with the PyTorch framework. It includes a command-line interface (CLI) for testing custom text input sentiment and supports training and evaluating different models.
 
