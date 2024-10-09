@@ -9,7 +9,7 @@ class ModelParams():
     It's used for the following model types: 'linear', 'm_linear', 'gv_rnn', 'gv_lstm' and 
     can be saved with the model into a jsons file.
     
-    Args: 
+    Args:
         model_type: 'linear', 'm_linear', 'gv_rnn', 'gv_lstm'
         vocab_size: the size of the vocabulary used with the model
         paragraph_size: the size of one paragraph used with the model
@@ -38,24 +38,6 @@ class ModelParams():
         return f"model_type: {self.model_type}, vocab_size:{self.vocab_size}, batch_size:{self.batch_size}, paragraph_size: {self.paragraph_size}, dropout_prob:{self.dropout_prob}, embedding_dim:{self.embedding_dim}, hidden_dim:{self.hidden_dim}, output_dim:{self.output_dim}, sentiment_threshold:{self.sentiment_threshold}"
 
 # custom dataset class to handle the data
-class ReviewLabelDataset(Dataset):
-    """
-    Data class for linear and multi linear models.
-    Custom dataset class to handle the data.
-    """
-    def __init__(self, reviews, labels):
-        self.reviews = reviews
-        self.labels = labels
-
-    def __len__(self):
-        return len(self.reviews)
-
-    def __getitem__(self, idx):
-        review = torch.tensor(self.reviews[idx], dtype=torch.long)
-        label = torch.tensor(self.labels[idx], dtype=torch.long)
-        return review, label
-
-
 class GloVeDataset(Dataset):
     """
     Data class for GloVe RNN and GloVe LSTM models.

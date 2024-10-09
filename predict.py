@@ -21,16 +21,10 @@ def get_prediction_from_str(model_type: str, query_text: str):
     
     cleaned_text = text_utils.clean_text(query_text)
     # load appropriate vocabulary and vectorize input text
-    if (model_type == 'gv_lstm') or (model_type == 'gv_rnn'):
-        # load vector vocab
-        vocab = file_utils.load_glo_ve_vector(VOCABS[model_type])
-        # vocab_size
-        input_vec = vectorizers.build_glo_ve_vector([cleaned_text], vocab.wv, model_params.paragraph_size)
-    else:
-        vocab = file_utils.load_vocabulary(VOCABS[model_type])
-        # vectorize the input text
-        vocab_to_idx = text_utils.build_word_to_idx_vocab(vocab)
-        input_vec = vectorizers.build_word_to_idx_vector([cleaned_text], vocab_to_idx, model_params.vocab_size)
+    # load vector vocab
+    vocab = file_utils.load_glo_ve_vector(VOCABS[model_type])
+    # vocab_size
+    input_vec = vectorizers.build_glo_ve_vector([cleaned_text], vocab.wv, model_params.paragraph_size)
 
     input_tensor = torch.from_numpy(np.array(input_vec))
 

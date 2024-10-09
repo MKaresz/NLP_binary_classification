@@ -13,6 +13,7 @@ DATA_PATH_YELP_TEST = 'data\\test_data_yelp.csv'
 
 # model types
 MODELS = {"Simple perceptron": 'linear', "Multi linear": 'm_linear', "RNN": 'gv_rnn', "LSTM": 'gv_lstm'}
-VOCABS = {"linear": 'vocab_20k', "m_linear": 'vocab_20k', "gv_rnn": 'glo_ve_19k', "gv_lstm": 'glo_ve_19k'}
+#VOCABS = {"linear": 'vocab_20k', "m_linear": 'vocab_20k', "gv_rnn": 'glo_ve_19k', "gv_lstm": 'glo_ve_19k'}
+VOCABS = {"linear": 'glo_ve_19k', "m_linear": 'glo_ve_19k', "gv_rnn": 'glo_ve_19k', "gv_lstm": 'glo_ve_19k'}
 
 

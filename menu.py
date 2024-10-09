@@ -48,7 +48,7 @@ def make_train(model_type):
         vocab_name= 'vocab_20K',
         glo_ve_name= 'glo_ve_19k',
         num_epochs= 50,
-        batch_size= 32,
+        batch_size= 16,
         paragraph_size= 100,
         dropout_prob= 0.5,
         embedding_dim= 64,

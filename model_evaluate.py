@@ -1,7 +1,6 @@
 import file_utils   
 import text_utils     
 import vectorizers  
-from custom_types import ReviewLabelDataset
 from custom_types import ModelParams
 
 import numpy as np

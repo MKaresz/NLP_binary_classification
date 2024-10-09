@@ -5,7 +5,6 @@ import text_utils
 import vectorizers
 import model_evaluate
 from custom_types import ModelParams
-from custom_types import ReviewLabelDataset
 from custom_types import GloVeDataset
 
 import torch
@@ -214,16 +213,9 @@ def call_train_torch_model(model_type: str, vocab_name: str, glo_ve_name: str, n
                                                           paragraph_size=paragraph_size)
     develop_loader, _ = get_data_loader(model_type=model_type, df=df_develop, batch_size=batch_size,
                                                           paragraph_size=paragraph_size)
-
-    if (model_type == 'gv_lstm') or (model_type == 'gv_rnn'):
-        vocab_size = len(vocab.wv.key_to_index)
-    else:
-        vocab_size = len(vocab)
-
-    # change embedding dim to pass embedding of GloVe
-    if (model_type == 'gv_lstm') or (model_type == 'gv_rnn'):
-        # this needs to pass to the generated vector size coming from the KeyedVector matrix
-        embedding_dim=vocab.vector_size
+    # set embedding vector size
+    vocab_size = len(vocab.wv.key_to_index)
+    embedding_dim=vocab.vector_size
 
     # create model params
     model_params = ModelParams(model_type=model_type, vocab_size=vocab_size, batch_size=batch_size,
@@ -239,24 +231,11 @@ def call_train_torch_model(model_type: str, vocab_name: str, glo_ve_name: str, n
 def get_data_loader(model_type: str, df: pd.DataFrame, batch_size: int, paragraph_size: int):
     # clean develop corpora for testing
     cleaned_corpus = text_utils.clean_corpus(corpus=df['review'].tolist())
-
-    if (model_type == 'gv_lstm') or (model_type == 'gv_rnn'):
-        # load vector vocab
-        vocab = file_utils.load_glo_ve_vector(globals.VOCABS[model_type])
-        X_vec = np.array(vectorizers.build_glo_ve_vector(cleaned_corpus, vocab.wv, paragraph_size))
-        y_vec = df['sentiment'].tolist()
-        
-        dataset = GloVeDataset(X_vec, y_vec)
-    else:
-        # load vocab
-        vocab = file_utils.load_vocabulary(globals.VOCABS[model_type])
-        # convert words to indexes in vocab
-        vocab_to_idx = text_utils.build_word_to_idx_vocab(vocab)
-        # create sized vectors using word indexes => for padding using 1 and un-knows using 0
-        X_vec = vectorizers.build_word_to_idx_vector(cleaned_corpus, vocab_to_idx, paragraph_size)
-        y_vec = df['sentiment'].tolist()
-
-        dataset = ReviewLabelDataset(X_vec, y_vec)
+    # vectorize
+    vocab = file_utils.load_glo_ve_vector(globals.VOCABS[model_type])
+    X_vec = np.array(vectorizers.build_glo_ve_vector(cleaned_corpus, vocab.wv, paragraph_size))
+    y_vec = df['sentiment'].tolist()
+    dataset = GloVeDataset(X_vec, y_vec)
 
     data_loader = DataLoader(dataset, batch_size, shuffle=False, drop_last=True)
     return (data_loader, vocab)

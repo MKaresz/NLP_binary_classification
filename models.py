@@ -20,14 +20,12 @@ class SimpleLinearClassifier(nn.Module):
     """
     def __init__(self, vocab_size, embedding_dim, output_dim=1):
         super(SimpleLinearClassifier, self).__init__()
-        self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.fc = nn.Linear(embedding_dim, output_dim)
 
     def forward(self, x):
-        x = self.embedding(x)
         x = x.mean(dim=1)  # Average the embeddings across the sequence length
         x = self.fc(x)
-        return torch.sigmoid(x) # if self.fc.out_features == 1 else torch.softmax(x, dim=1)
+        return torch.sigmoid(x)
 
 # Initialize Linear the model
 def create_linear_model(vocab_size: int, embedding_dim: int, output_dim: int = 1):
@@ -38,12 +36,10 @@ def create_linear_model(vocab_size: int, embedding_dim: int, output_dim: int = 1
 class MultiLinearClassifier(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim = 1):
         super(MultiLinearClassifier, self).__init__()
-        self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.fc1 = nn.Linear(embedding_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, output_dim)
     
     def forward(self, x):
-        x = self.embedding(x)
         x = x.mean(dim=1)  # Average the embeddings across the sequence length
         x = self.fc1(x)
         x = F.relu(x)
