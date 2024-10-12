@@ -33,9 +33,8 @@ def get_prediction_from_str(model_type: str, query_text: str):
     with torch.no_grad():
         input_tensor, model = input_tensor.to(device), model.to(device)
         outputs = model(input_tensor).squeeze()
-        print("outputs", outputs)
         prediction = "positive" if outputs > model_params.sentiment_threshold else "negative"
-        print("input: " + query_text + '"' + '\n', prediction)
+        print(outputs, " >> ", prediction)
 
 def get_prediction_from_df(model_type: str, df_data: pd.DataFrame):
     # Make device agnostic code
