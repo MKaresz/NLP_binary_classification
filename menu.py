@@ -1,6 +1,7 @@
 import train
 import predict
 import model_evaluate
+import file_utils
 
 import sys
 import pandas as pd
@@ -43,21 +44,22 @@ def make_predict(model_type: str):
 
 def make_train(model_type):
     """Train the model with default hyperparameters."""
+    _, model_params = file_utils.load_model(model_type=model_type)
     train.call_train_torch_model(
-        model_type= model_type,
-        vocab_name= 'vocab_20K',
-        glo_ve_name= 'glo_ve_19k',
-        num_epochs= 50,
-        batch_size= 16,
-        paragraph_size= 100,
-        dropout_prob= 0.5,
-        embedding_dim= 64,
-        hidden_dim= 64,
-        output_dim= 1,
-        sentiment_threshold= 0.5,
-        evaluate_model= True, 
-        save_model= False
-    )
+        model_type=model_type,
+        vocab_name='vocab_1K',
+        glo_ve_name='glo_ve_25k',
+        num_epochs=20,
+        batch_size=model_params.batch_size,
+        paragraph_size=model_params.paragraph_size,
+        dropout_prob=model_params.dropout_prob,
+        embedding_dim=model_params.embedding_dim,
+        hidden_dim=model_params.hidden_dim,
+        output_dim=model_params.output_dim,
+        sentiment_threshold=model_params.sentiment_threshold,
+        evaluate_model= True,
+        save_model= True
+        )
 
 def main_menu():
     while True:
