@@ -54,20 +54,20 @@ Please choose a model:
     "5" "Quit"
 
 Please choose an option:
-    "1" "Evaluate this model"
-    "2" "Predict"
-    "3" "Train"
-    "4" "Back to the Models"
-    "5" "Quit"
+    "1" "Evaluate this model on different datasets."
+    "2" "Make prediction from user input"
+    "3" "Train this model on IMDB train dataset."
+    "4" "Back to Main Menu"
 
-choosing "1" > Evaluate this model:
+
+choosing "1" > Evaluate this model on different datasets.:
 Please choose a dataset:
-    "1" "IMDB"
-    "2" "AMAZON"
-    "3" "YELP"
-    "4" "Quit"
+    "1" "IMDB movie reviews"
+    "2" "AMAZON product reviews"
+    "3" "YELP restaurant reviews"
+    "4" "Back previous Menu"
 
-choosing "2" > Predict:
+choosing "2" > Make prediction from user input:
 Write a review to get a sentiment prediction from the model:
 An overhyped film that doesn’t live up to its expectations, plagued by a weak script and clichéd characters. It’s a frustrating watch that ultimately feels like a waste of time.
 
@@ -77,7 +77,7 @@ outputs tensor(0.0569, device='cuda:0')
 Note: One can try from the listed examples in the ./review_samples.txt file.
 
 
-choosing "3" > Train:
+choosing "3" > Train this model on IMDB train dataset.:
 (The chosen model type train process starts.)
 ```
 
